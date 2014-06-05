@@ -1,0 +1,33 @@
+.ui-helper-hidden-accessible{
+	.hide-me;
+}
+.ui-autocomplete {
+	z-index:100;
+	background-color: @white;
+	.radius(@box-radius);
+	.box-shadow(@params:@box-shadow-minor);
+    width: 20em !important;
+	padding-left: 0;
+	list-style-type: none;
+	border:1px solid @grey;
+	li {
+		margin: 0;
+		padding: 0;
+		a {
+			display: block;
+			text-decoration: none;	
+			padding: 3px 0 3px 5px;
+			cursor: pointer;
+			span {
+				font-weight: bold;
+			}
+		}
+		a:hover, 
+		a.ui-state-hover {
+			background-color: @hover;
+		}	
+	}
+}
+/* workarounds */
+* html .ui-autocomplete { width:1px; } /* without this, the menu expands to 100% in IE6 */
+/*end autocomplete*/

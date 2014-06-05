@@ -1,0 +1,80 @@
+.passengers{
+	padding:5px;
+	position:relative;
+	background-color:#ccc;
+	legend{
+		position:absolute;
+		left:0;
+	}
+}
+fieldset{
+	.radio{
+		.legend-float(@label-width);
+	}
+	.name{
+		.label-field(@label-width, @text-field-width/2 );
+		.first-name, 
+		.surname{
+			.hide-me; 
+		} 
+	}
+	.checkbox{
+		.like-label-field(@label-width);	
+	}
+	.select{
+		.label-field(@label-width, @text-field-width:auto);
+	}
+	.text{
+		.label-field(@label-width,  @text-field-width);
+	}
+	//End Modules
+	//IE graceful degredation
+	.number-passengers{ 
+		.legend-float(@label-width, @container-width:15%, @bottom:0);
+		select{
+			height:2.5em;
+		}
+	}
+}
+
+
+.ticket-type{
+	.custom-select(@highlight-color:lighten(@green,20%));
+	label{
+		.clearfix;
+		.img,
+		.txt{
+			padding:5px;
+			display:block;
+			float:left;
+			min-height:20px;
+		}
+		.img{
+			width:70px;
+		}
+		.txt{
+			width: 10em;
+		}
+	}
+	
+}
+
+
+
+
+
+
+
+
+.journey-card{
+	//width:400px;
+	h3,
+	h4{
+		.hide-me;
+	}
+}
+
+.journey-detail-card{
+	.journey-route(14px);
+	position:relative;
+}

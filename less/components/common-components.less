@@ -1,0 +1,701 @@
+// ================ //
+// = CSS3 Helpers = //
+// ================ //
+// clearfix (thanks for the mixin-able syntax, Mark Otto!)
+.clearfix(){
+  zoom: 1;
+  &:after{
+    content: " ";
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+  }
+}
+
+
+//Accessibility hides
+.hide-me,
+.hidden{
+	display:block;
+	position:absolute;
+	left:-10000px;
+}
+.hide-text(){
+	display:inline-block;
+	text-indent: 100%;
+	white-space: nowrap;
+	overflow: hidden;
+}
+// Rounded Corners
+.radius(@radius){
+  -moz-border-radius: @radius; // FF 1+
+  -webkit-border-radius: @radius; // FF 1+
+  border-radius: @radius; // Opera 10.5, IE 9, Saf5, Chrome
+}
+
+// Top-to-Bottom Gradient
+.gradientV(@start, @end){
+  background: (@start + @end) / 2; // Non CSS3 browsers get the average color
+  background-image: -moz-linear-gradient(top,  @start, @end); // FF 3.6
+  background-image: -webkit-gradient(linear, left top, left bottom, from(@start), to(@end)); // Safari 4+, Chrome
+  background-image: -webkit-linear-gradient(top, @start, @end); // Chrome 10+, Safari 5.1+
+  background-image: -o-linear-gradient(top, @start, @end); // Opera 11.10+
+  background-image: linear-gradient(top, @start, @end); // CSS3
+  filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d)", @start, @end); // IE6 & 7
+  -ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d)", @start, @end); // IE8
+  background-image: -ms-linear-gradient(top, @start, @end); // IE10
+}
+
+// Left-to-Right Gradient
+.gradientH(@start, @end){
+  background: (@start + @end) / 2; // Non CSS3 browsers get the average color
+  background-image: -moz-linear-gradient(left,  @start, @end); // FF 3.6
+  background-image: -webkit-gradient(linear, left center, right center, from(@start), to(@end)); // Safari 4+, Chrome
+  background-image: -webkit-linear-gradient(left center, right center, from(@start), to(@end)); // Chrome 10+, Safari 5.1+
+  background-image: -o-linear-gradient(left, @start, @end); // Opera 11.10+
+  background-image: linear-gradient(left, @start, @end); // CSS3
+  filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d, GradientType=1)", @start, @end); // IE6 & 7
+  -ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d, GradientType=1)", @start, @end); // IE8
+  background-image: -ms-linear-gradient(left, @start, @end); // IE10
+}
+
+// Top-to-Bottom 3 Stop Gradient
+.gradientV3(@start:#efefef, @middle:darken(#efefef, 10%), @middlePos:50, @end:#efefef){
+  background: (@start + @end) / 2; // Non CSS3 browsers get the average color
+  background-image: -moz-linear-gradient(top,  @start, @middle @middlePos * 1%, @end); // FF 3.6
+  background-image: -webkit-gradient(linear, left top, left bottom, from(@start), color-stop(@middlePos / 100, @middle), to(@end)); // Safari 4+, Chrome
+  background-image: -webkit-linear-gradient(top, from(@start), color-stop(@middlePos / 100, @middle), to(@end)); // Chrome 10+, Safari 5.1+
+  background-image: -o-linear-gradient(top, @start 0%, @middle @middlePos * 1%, @end 100%); // Opera 11.10+
+  filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d)", @start, @end); // IE6 & 7
+  -ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d)", @start, @end); // IE8
+  background-image: linear-gradient(top, @start 0%, @middle @middlePos * 1%, @end 100%); // CSS3
+}
+
+// Left-to-Right 3 Stop Gradient
+.gradientH3(@start, @middle, @middlePos, @end){
+  background: (@start + @end) / 2; // Non CSS3 browsers get the average color
+  background-image: -moz-linear-gradient(left,  @start, @middle @middlePos * 1%, @end); // FF 3.6
+  background-image: -webkit-gradient(linear, left center, right center, from(@start), color-stop(@middlePos / 100, @middle), to(@end)); // Safari 4+, Chrome
+  background-image: -webkit-linear-gradient(left, from(@start), color-stop(@middlePos / 100, @middle), to(@end)); // Chrome 10+, Safari 5.1+
+  background-image: -o-linear-gradient(left, @start 0%, @middle @middlePos * 1%, @end 100%); // Opera 11.10+
+  filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d)", @start, @end); // IE6 & 7
+  -ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d)", @start, @end); // IE8
+  background-image: linear-gradient(left, @start 0%, @middle @middlePos * 1%, @end 100%); // CSS3
+}
+// Top-to-Bottom 4 Stop Gradient
+.gradientV4(@color1, @color2, @position2, @color3, @position3, @color4){
+  background: (@color1 + @color4) / 2; // Non CSS3 browsers get the average color
+  background-image: -moz-linear-gradient(top,  @color1, @color2 @position2 * 1%, @color3 @position3 * 1%, @color4); // FF 3.6
+  background-image: -webkit-gradient(linear, left top, left bottom, from(@color1), color-stop(@position2 / 100, @color2), color-stop(@position3 / 100, @color3), to(@color4)); // Safari 4+, Chrome
+  background-image: -webkit-linear-gradient(top, from(@color1), color-stop(@position2 / 100, @color2), color-stop(@position3 / 100, @color3), to(@color4)); // Chrome 10+, Safari 5.1+
+  background-image: -o-linear-gradient(top, @color1 0%, @color2 @position2 * 1%, @color3 @position3 * 1%, @color4 100%); // Opera 11.10+
+  filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d)", @color1, @color4); // IE6 & 7
+  -ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d)", @color1, @color4); // IE8
+  background-image: linear-gradient(top, @color1 0%, @color2 @position2 * 1%, @color3 @position3 * 1%, @color4 100%); // CSS3
+}
+
+// Left-to-Right 4 Stop Gradient
+.gradientH4(@color1, @color2, @position2, @color3, @position3, @color4){
+  background: (@color1 + @color4) / 2; // Non CSS3 browsers get the average color
+  background-image: -moz-linear-gradient(left,  @color1, @color2 @position2 * 1%, @color3 @position3 * 1%, @color4); // FF 3.6
+  background-image: -webkit-gradient(linear, left center, right center, from(@color1), color-stop(@position2 / 100, @color2), color-stop(@position3 / 100, @color3), to(@color4)); // Safari 4+, Chrome
+  background-image: -webkit-linear-gradient(left center, right center, from(@color1), color-stop(@position2 / 100, @color2), color-stop(@position3 / 100, @color3), to(@color4)); // Chrome 10+, Safari 5.1+
+  background-image: -o-linear-gradient(left, @color1 0%, @color2 @position2 * 1%, @color3 @position3 * 1%, @color4 100%); // Opera 11.10+
+  filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d, GradientType=1)", @color1, @color4); // IE6 & 7
+  -ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d, GradientType=1)", @color1, @color4); // IE8
+  background-image: linear-gradient(left, @color1 0%, @color2 @position2 * 1%, @color3 @position3 * 1%, @color4 100%); // CSS3
+}
+.gradientRadial(@color1:#1e5799, @color2:#7db9e8){
+	background: (@color1 + @color2) / 2;  /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover, @color1 0%, @color2 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,@color1), color-stop(100%,@color2)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover, @color1 0%,@color2 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover, @color1 0%,@color2 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover, @color1 0%,@color2 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center, @color1 0%,@color2 100%); /* W3C */
+	filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d, GradientType=1)", @color1, @color2); // IE6 & 7
+  	-ms-filter: %("progid:DXImageTransform.Microsoft.gradient(startColorstr=%d, endColorstr=%d, GradientType=1)", @color1, @color2); // IE8
+}
+// Drop shadow
+.box-shadow(@params:1px 1px 5px rgba(50, 50, 50, 0.4)){
+  -moz-box-shadow: @params; // FF3.5+
+  -webkit-box-shadow: @params; // Saf3.0+, Chrome
+  box-shadow: @params; // Opera 10.5, IE9+, Chrome 10+
+}
+.text-shadow(@params){
+	text-shadow: @params;
+    //filter: dropshadow(color=#c7c7c7, offx=1, offy=1);
+}
+.inner-shadow(@params) {
+  -webkit-box-shadow: inset @params;
+  -moz-box-shadow: inset @params;
+  box-shadow: inset @params;
+}
+
+// Transition
+.transition(@params:all 0.25s ease-in-out){
+  -moz-transition: @params; // FF4+
+  -o-transition: @params; // Opera 10.5+
+  -webkit-transition: @params; // Safari 3.2+, Chrome
+  -ms-transition: @params; // IE10
+  transition: @params; // CSS3
+}
+.transition-duration(@duration: 0.2s) {
+  -moz-transition-duration: @duration;
+  -webkit-transition-duration: @duration;
+  -o-transition-duration: @duration;
+  transition-duration: @duration;
+}
+
+.triangle-border() {
+	position:relative;
+	&:before {
+		content:"";
+		position:absolute;
+		border-style:solid;
+		/* reduce the damage in FF3.0 */
+		display:block; 
+		width:0;
+	}
+	&:after {
+		content:"";
+		position:absolute;
+		border-style:solid;
+		/* reduce the damage in FF3.0 */
+		display:block; 
+		width:0;
+	}
+
+}
+.triangle-border-left(@borderColor:#ebebeb, @bgColor:#fff, @pos:10px, @border:1px, @size:15px ){
+	.triangle-border();
+	margin-left:@size+5px;
+	&:before {
+		top:@pos; /* controls vertical position */
+		bottom:auto;
+		left:@size - @size - @size; /* value = - border-left-width - border-right-width */
+		border-width:@size @size @size 0;
+		border-color:transparent @borderColor;
+	}
+	&:after {
+		top:@pos+@border; /* value = (:before top) + (:before border-top) - (:after border-top) */
+		bottom:auto;
+		left:(@size - @border) -  (@size - @border) - (@size - @border); /* value = - border-left-width - border-right-width */
+		border-width: (@size - @border) (@size - @border) (@size - @border) 0;
+		border-color:transparent @bgColor;
+	}
+}
+
+.triangle-border-right(@borderColor:#ebebeb, @bgColor:#fff, @pos:40px, @border:1px, @size:15px ){
+	.triangle-border();
+	margin-right:@size+5px;
+	&:before {
+		top:@pos; /* controls vertical position */
+		bottom:auto;
+		left:auto;
+		right:@size - @size - @size; /* value = - border-left-width - border-right-width */
+		border-width:@size 0 @size @size;
+		border-color:transparent @borderColor;
+	}
+	&:after {
+		top:@pos+@border; /* value = (:before top) + (:before border-top) - (:after border-top) */
+		bottom:auto;
+		left:auto;
+		right:(@size - @border) -  (@size - @border) - (@size - @border); /* value = - border-left-width - border-right-width */
+		border-width: (@size - @border) 0 (@size - @border) (@size - @border);
+		border-color:transparent @bgColor;
+	}
+}
+
+.triangle-border-bottom(@borderColor:#ebebeb, @bgColor:#fff, @pos:40px, @border:1px, @size:15px ){
+	.triangle-border();
+	margin-bottom: @size+5px;
+	&:before{
+		bottom:@size - @size - @size; /* value = - border-top-width - border-bottom-width */
+		left:@pos; /* controls horizontal position */
+		border-width:@size @size 0;
+		border-color:@borderColor transparent;
+	}
+	&:after{
+		bottom:(@size - @border) -  (@size - @border) - (@size - @border); /* value = - border-top-width - border-bottom-width */
+		left:@pos + @border; /* value = (:before left) + (:before border-left) - (:after border-left) */
+		border-width:(@size - @border) (@size - @border) 0;
+		border-color:@bgColor transparent;
+	}
+}
+
+.triangle-border-top(@borderColor:#ebebeb, @bgColor:#fff, @pos:40px, @border:1px, @size:15px ){
+	.triangle-border();
+	margin-top: @size+5px;
+	&:before{
+		top:@size - @size - @size; /* value = - border-top-width - border-bottom-width */
+		left:@pos; /* controls horizontal position */
+		border-width:0 @size @size;
+		border-color:@borderColor transparent;
+	}
+	&:after{
+		top:(@size - @border) -  (@size - @border) - (@size - @border); /* value = - border-top-width - border-bottom-width */
+		left:@pos + @border; /* value = (:before left) + (:before border-left) - (:after border-left) */
+		border-width:0 (@size - @border) (@size - @border);
+		border-color:@bgColor transparent;
+	}
+}
+
+/* Variant : for left positioned triangle
+------------------------------------------ */
+
+
+.error-messages{
+	background-color:#d40124;
+	color:#fff;
+	padding:10px 10px 10px 15px;
+	background-position: -512px -504px;
+	margin-bottom:25px;
+	h2{
+		font-size:1.4em;
+	}
+	li{
+		margin-left:16px;
+		display: list-item;
+		list-style:disc;
+	}
+	a{
+		color:#fff;
+		text-decoration:underline;
+	}
+}
+
+
+.error label{
+	color:#d40124;
+}
+.error label .error-label{
+	
+	background-position: -557px -894px;
+	padding:0 8px;
+}
+
+.error select,
+.error input{
+	border:1px solid #d40124;
+}
+
+
+//Forms
+
+
+.arrow-base(){
+	display:inline-block;
+	width: 0; 
+	height: 0; 
+}
+.arrow-up(@size:5px, @color:#000, @increase-length-by:0) {
+	.arrow-base;
+	border-left: @size solid transparent;
+	border-right: @size solid transparent;
+	border-bottom: @size+@increase-length-by solid @color;
+}
+
+.arrow-down(@size:5px, @color:#000, @increase-length-by:0) {
+	.arrow-base;
+	border-left: @size solid transparent;
+	border-right: @size solid transparent;
+	border-top: @size+@increase-length-by solid @color;
+}
+
+.arrow-right(@size:5px, @color:#000, @increase-length-by:0){
+	.arrow-base;
+	border-top: @size solid transparent;
+	border-left: @size+@increase-length-by solid @color;
+	border-bottom: @size solid transparent;
+}
+.arrow-left(@size:5px, @color:#000, @increase-length-by:0) {
+	.arrow-base;
+	border-top: @size solid transparent;
+	border-bottom: @size solid transparent; 
+	border-right:@size+@increase-length-by solid @color; 
+}
+.circle(@size:10px, @color:#000){
+	.radius( @size/2 );
+	width:@size;
+	height:@size;
+	background-color:@color;
+}
+.star-five() {
+   margin: 50px 0;
+   position: relative;
+   display: block;
+   color: red;
+   width: 0px;
+   height: 0px;
+   border-right:  100px solid transparent;
+   border-bottom: 70px  solid red;
+   border-left:   100px solid transparent;
+   -moz-transform:    rotate(35deg);
+   -webkit-transform: rotate(35deg);
+   -ms-transform:     rotate(35deg);
+   -o-transform:      rotate(35deg);
+   &:before{
+	   	border-bottom: 80px solid red;
+	   border-left: 30px solid transparent;
+	   border-right: 30px solid transparent;
+	   position: absolute;
+	   height: 0;
+	   width: 0;
+	   top: -45px;
+	   left: -65px;
+	   display: block;
+	   content: '';
+	   -webkit-transform: rotate(-35deg);
+	   -moz-transform:    rotate(-35deg);
+	   -ms-transform:     rotate(-35deg);
+	   -o-transform:      rotate(-35deg);
+   }
+   &:after{
+   		position: absolute;
+	   display: block;
+	   color: red;
+	   top: 3px;
+	   left: -105px;
+	   width: 0px;
+	   height: 0px;
+	   border-right: 100px solid transparent;
+	   border-bottom: 70px solid red;
+	   border-left: 100px solid transparent;
+	   -webkit-transform: rotate(-70deg);
+	   -moz-transform:    rotate(-70deg);
+	   -ms-transform:     rotate(-70deg);
+	   -o-transform:      rotate(-70deg);
+	   content: '';
+   }
+}
+
+.form-field-focus(@color:@color){
+	transition: all 0.25s ease-in-out;
+	-webkit-transition: all 0.25s ease-in-out;
+	-moz-transition: all 0.25s ease-in-out;
+	.box-shadow(@params:0 0 5px rgba(red(@color), green(@color), blue(@color), 0));
+	&:focus{
+		border:1px solid @color;
+		.box-shadow(@params: 0 0 5px rgba(red(@color), green(@color), blue(@color), 1));
+		outline:none;
+	}
+}
+/*
+.form-line-height(@form-line-height:2.8em){
+	line-height:@form-line-height;
+}
+*/
+//Radio layout. eg. with the legend floated left, eg 
+//Question?  o yes  o No
+.legend-float(@label-width:30%, @label-text-align:right, @container-width:auto, @bottom:auto, @top:auto){
+	//.form-line-height;
+	fieldset{
+		position:relative;
+		legend {
+			position:absolute;
+			bottom:@bottom;
+			middle:0;
+			left:0;
+			width: @label-width;
+			text-align: @label-text-align;
+			padding-right:3px;
+			/*
+			float: left;
+			*/
+		}
+		p{
+			padding-left:5px;
+			display:inline-block;
+			margin-left: @label-width;
+		}
+		ul{
+			padding-left:5px;
+			margin-left: @label-width;
+			display:block;
+		}
+		li{
+			display:inline-block;
+			width:@container-width;
+		}
+		label{
+			padding-right:0.5em;
+		}
+	} 
+	&.ie7{
+		fieldset{
+			legend{
+				color:red
+			}
+		}
+	}
+}
+
+//Text label and field
+.label-field(@label-width:30%, @text-field-width: 70%, @label-text-align:right, @clear: both ){
+	//.form-line-height;
+	display:inline-block;
+	clear: @clear;
+	label{
+		display:inline-block;
+		width:@label-width;
+		text-align: @label-text-align;
+		padding-right:3px;
+	}
+	input,
+	select{
+		width: @text-field-width;
+	}
+}
+//Use this to get some padding/margin on the left
+.like-label-field(@label-width:30%){
+
+	margin-left:@label-width;
+	padding-left:5px;
+}
+//End Form stuff
+
+
+//BUTTONS:
+.button-major(@color:#efefef, @borderColor:#919d56, @fontSize: 1.2em, @hoverColor:#F7F7F7, @hoverBorder:#919D56) {
+    .radius(4px);
+    .gradientV3(@start: lighten(@color, 20%), @middle:darken(@color, 10%), @end: lighten(@color, 20%) );
+    //height:25px;
+    border-color: @borderColor;
+    .inner-shadow(1px 1px 0 rgba(255,255,255,0.8));
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    font-size:@fontSize;
+    min-height:2.5em;
+    //color:#08335E;
+    outline: medium none;
+    padding: 3px 15px;
+    //font-size:1em;
+    text-align: center;
+    text-decoration: none;
+    .text-shadow(1px 1px 0 rgba(255, 255, 255, 0.67));
+    border-style: solid;
+    border-width: 1px;
+    .transition(all 1s ease-in);
+    &:active{
+    	background-color: @color;
+	    //.gradientV( @color, @color);
+	    .inner-shadow(1px 1px 0 rgba(255,255,255,0.5));
+	    transition: all 0.1s linear 0s;
+	}
+	&:before{
+		border-color: transparent transparent rgba(255, 255, 255, 0.67);
+	    bottom: -2px;
+	    content: " ";
+	    display: block;
+	    height: 100%;
+	    left: -1px;
+	    position: absolute;
+	}
+	&:hover,
+	&:focus{
+		//.gradientV(#E1ECB1, #C2D760);
+		//background:@color;
+		border-color:@hoverBorder;
+		.gradientV3(@start: lighten(@hoverColor, 30%), @middle: @hoverColor, @end: lighten(@hoverColor, 30%) );
+		.form-field-focus(@field-focus );
+	}
+	&[disabled]{
+		background:@grey;
+		&:hover{
+			background:@grey;
+		}
+	}
+}
+
+.direction-arrow-right(@color:#000, @size:8px){
+	&:before{
+		content:"";
+		display:inline-block;
+		width:50px;
+		background-color:@color;
+		height:1px;
+		margin-bottom:@size - 1;
+	}
+	&:after{
+		content:" ";
+		display:inline-block;
+		.arrow-right(@increase-length-by:3px, @size:@size, @color:@color);
+	}
+}
+/*
+.icon-common(){
+	display:block;
+	position:relative;
+    z-index:1;
+    overflow:hidden;
+    list-style:none;
+    padding:0;
+    //margin:0 0 0.25em;
+    &:before,
+    &:after{
+    	content:"";
+	    position:absolute;
+	    //top:50%;
+	    left:0;
+		//margin:-8px 0 0;
+	    background:#c55500;
+    }
+    a:before{
+    	content:"";
+	    position:absolute;
+	    //top:50%;
+	    //left:0;
+    }
+    a:after{
+    	content:"";
+	    position:absolute;
+	    //top:50%;
+	    //left:0;
+		//margin:-8px 0 0;
+	    background:#c55500;
+    }
+}
+.close(@size:16px, @color:red){
+	.icon-common;
+	@width: @size - 6;
+   	@x-pos: @size/2;
+   	@x-width: (@size * 15)/100;
+   	height:@size;
+   	width:@size;
+	&:before{
+		height:@size;
+   		width:@size;
+   		//margin-left:(@size * 5)/100;
+	    .circle(@size:@size, @color:@color);
+	}
+	a{
+		text-indent:-9999px;
+		.common(){
+			width:@x-width;
+			top:50%;
+			left:50%;
+			//top:49%;
+			//top:25%;
+		    //top:@x-pos/2.5;
+		    //left:@x-pos - @x-width;
+		    //left:49%;
+		    height:@width;
+		    margin-top:(@size - @x-width);
+		    background:#fff;
+		}
+		&:before{
+			.common();
+		    -webkit-transform:rotate(45deg);
+		    -moz-transform:rotate(45deg);
+		    -ms-transform:rotate(45deg);
+		    -o-transform:rotate(45deg);
+		    transform:rotate(45deg);
+		}
+		&:after{
+			.common();
+			-webkit-transform:rotate(315deg);
+		    -moz-transform:rotate(315deg);
+		    -ms-transform:rotate(315deg);
+		    -o-transform:rotate(315deg);
+		    transform:rotate(315deg);
+		}
+	}
+}
+*/
+
+/* Alternative style */
+/*
+.delete-alt a:before,
+.delete-alt a:after {
+    left:6px;
+    width:5px;
+    height:15px;
+    margin-top:-7px;
+    background:#c55500;
+    -webkit-transform:rotate(45deg);
+    -moz-transform:rotate(45deg);
+    -ms-transform:rotate(45deg);
+    -o-transform:rotate(45deg);
+    transform:rotate(45deg);
+}
+
+.delete-alt a:after {
+    left:1px;
+    width:15px;
+    height:5px;
+    margin-top:-2px;
+}
+
+.delete-alt a:hover:after,
+.delete-alt a:focus:after,
+.delete-alt a:active:after {
+    background:#730800;
+}
+*/
+	
+	
+	
+.close-button(@bgColor:red, @iconColor:white, @hoverColor:yellow, @hoverIconColor:black ){
+		position:absolute;
+		top:0;
+		right:3px;
+        background-color:@bgColor;
+        .radius(50%);
+        width:1.5em;
+        text-align:center;
+        text-decoration:none;
+        &:before{
+            display:block;
+            text-align:center;
+            .icon-x;
+            color:@iconColor;
+            padding:1px;
+        }
+        .text{
+            .hide-me;
+        }
+        &:hover{
+        	color:@hoverIconColor;
+            background-color:@hoverColor;
+            .form-field-focus(@field-focus);
+        }
+     }
+.button-minor() {
+    .radius(4px);
+    .gradientV(#e6eef5, #d4e2ee);
+    border-color: #99abbd;
+    .inner-shadow(1px 1px 0 rgba(255,255,255,0.5));
+    cursor: pointer;
+    display: inline-block;
+    font-weight: bold;
+    color:#08335E;
+    outline: medium none;
+    padding: 5px 10px;
+    font-size:1em;
+    text-align: center;
+    text-decoration: none;
+    text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.67);
+    border-style: solid;
+    border-width: 1px;
+    .transition(all .185s linear);
+    &:active{
+	    .gradientV(#e6eef5, #dfe9f2);
+	    .inner-shadow(1px 1px 0 rgba(255,255,255,0.5));
+	    transition: all 0.1s linear 0s;
+	}
+	&:after{
+		border-color: transparent transparent rgba(255, 255, 255, 0.67);
+	    bottom: -2px;
+	    content: " ";
+	    display: block;
+	    height: 100%;
+	    left: -1px;
+	    position: absolute;
+	}
+	&:hover{
+		.gradientV(#eef4f8, #e0eaf2);
+	}
+}

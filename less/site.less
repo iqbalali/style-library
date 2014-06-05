@@ -1,0 +1,108 @@
+
+/* Font variables */
+@body_color: #333;
+@heading_color: #111;
+
+@body_family: "Open Sans", "Helvetica Neue", Arial, Helvetica, Sans-Serif;
+@heading_family: "Open Sans Condensed", "Helvetica Neue", Arial, Helvetica, Sans-Serif;
+
+
+
+
+/* ========================================================== */
+/* = Import normalize baseline and grid                    = */
+/* ========================================================== */
+@import "components/normalise";
+@import "components/grid";
+@import "components/common-components";
+
+//This needs to appear before modules
+//Brand colours
+//TTL Brand colors:
+/*
+Note (from http://lesscss.org):
+hue(@color);        // returns the `hue` channel of @color
+saturation(@color); // returns the `saturation` channel of @color
+lightness(@color);  // returns the 'lightness' channel of @color
+red(@color);        // returns the 'red' channel of @color
+green(@color);      // returns the 'green' channel of @color
+blue(@color);       // returns the 'blue' channel of @color
+alpha(@color);      // returns the 'alpha' channel of @color
+luma(@color);       // returns the 'luma' value (perceptual brightness) of @color
+
+So to use rgba, for example with the green: 
+rgba(red(@green), green(@green), blue(@green), 100%)
+Will give you the rgb
+*/
+
+//General
+@box-radius:4px;
+@box-shadow: 1px 1px 5px rgba(50, 50, 50, 0.4);
+@box-shadow-overlay: 1px 1px 5px rgba(50, 50, 50, 0.4);
+@box-shadow-minor: 1px 1px 3px rgba(50, 50, 50, 0.2);
+
+// Typography
+@baseLineHeight: 1.4em;
+@fontFamily: Arial, sans-serif;
+@textColor: #333;
+@linkColor: lighten(#666, 5%); 
+
+//@fontSize: 	78%;
+@fontSize: 82%;
+@fontSmall: 0.9em;
+@fontRegular: 1em;
+@fontRegularPlus: 1.2em;
+@fontMedium: 1.5em;
+@fontLarge: 1.8em;
+@fontLargePlus: 2.5em;
+
+//Modules are built from common-components mentioned above
+
+
+body {
+	//background-color: #dbe7f3;
+	color: @textColor;
+	font-family: @fontFamily;
+	font-size: @fontSize;
+	line-height: @baseLineHeight;   
+} 
+header,
+#main,
+footer{
+	max-width:78em;
+	margin:0 auto;
+	.clearfix;
+}
+header{
+	background-color:green;
+	div.logo, 
+	ul,
+	li{
+		display:block;
+		float:left;
+	}
+}
+
+section.main{
+	.column(7);
+
+	
+}
+aside{
+	.column(5);
+	background-color:#ccc;
+}
+
+footer{
+	background-color:#999;
+}
+//Screens less than 800px
+
+@media all and (max-width: 900px) {
+	section.main { .column(12); border:1px solid green;}
+	aside { .column(12); border:1px solid green;}
+}
+
+
+
+

@@ -1,0 +1,61 @@
+//Note: You need to also include js/jquery.custom-selectbox.js for some funtionality
+//Also need components.less
+.custom-select(@highlight-color: #efefef, @select-label-width:@label-width, @select-padding-left:5px){
+	.legend-float(@select-label-width);
+	@select-input-padding: 7px;
+	.selected-item-selectbox{
+		padding-top: @select-input-padding;
+		padding-bottom: @select-input-padding;
+	}
+	legend{
+		padding-top: @select-input-padding+1px;
+		padding-bottom: @select-input-padding+1px;
+	}
+	.select-container{
+		.selected-item-selectbox{
+			border:1px solid black;
+			&:after{
+				content:" ";
+				.arrow-down(@size:7px, @color:@textColor);
+				margin:0 5px;
+			}
+			cursor:hand;
+			cursor:pointer;
+		}
+		padding-left:@select-padding-left;
+		ul{
+			.hide-me();
+			&.show{
+				position:absolute;	
+				display:block;
+				background-color:#fff;
+				border:1px solid black;
+				z-index:1000;
+				left:@select-padding-left;
+				padding:0;
+				//bottom:0;
+				margin-left:@select-label-width;
+			}
+		}
+		li:last-child{
+			border-bottom:0;
+		}
+		li{
+			border-bottom:1px dashed black;
+			display:block;
+			input[type="radio"]{
+				.hide-me;
+			}
+			input[type="radio"]:checked + label,
+			label.selected{
+				background-color: @highlight-color;
+			}
+			label{
+				display:block;
+				cursor:hand;
+				cursor:pointer;
+			}
+		}
+	}
+	
+}
